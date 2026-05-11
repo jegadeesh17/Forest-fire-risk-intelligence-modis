@@ -27,8 +27,16 @@ def train_prophet_model(df):
     model.fit(prophet_df)
     return model, ts_data
 
-def generate_forecast(model, periods=6, freq='M'):
-    """Generate projected wildfire activity trends for the next 6 months."""
+def generate_forecast(model, periods=6, freq='ME'):
+    """Generate projected wildfire activity trends up to 6 months from today's date."""
+    last_date = model.history['ds'].max()
+    today = pd.Timestamp.today()
+    target_date = today + pd.DateOffset(months=6)
+    
+    if target_date > last_date:
+        diff_months = (target_date.year - last_date.year) * 12 + target_date.month - last_date.month
+        periods = max(periods, diff_months)
+        
     future = model.make_future_dataframe(periods=periods, freq=freq)
     forecast = model.predict(future)
     return forecast
