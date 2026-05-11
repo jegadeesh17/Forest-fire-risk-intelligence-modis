@@ -38,6 +38,7 @@ st.divider()
 
 @st.cache_data
 def load_data():
+    # Force cache invalidation to load region_name
     data_path = os.path.join(os.path.dirname(__file__), "../data/modis_data10%.csv")
     if not os.path.exists(data_path):
         return pd.DataFrame()
