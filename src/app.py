@@ -4,6 +4,7 @@ import folium
 from streamlit_folium import st_folium
 import os
 import sys
+import altair as alt
 
 # Ensure src directory is in path
 sys.path.append(os.path.abspath(os.path.dirname(__file__)))
@@ -101,8 +102,16 @@ with col_map:
 
 with col_state:
     st.subheader("Regional Risk Distribution")
-    state_counts = filtered_df['region_name'].value_counts().head(5)
-    st.bar_chart(state_counts)
+    state_counts = filtered_df['region_name'].value_counts().head(5).reset_index()
+    state_counts.columns = ['Region', 'Fire Count']
+    
+    chart = alt.Chart(state_counts).mark_bar().encode(
+        x=alt.X('Region', sort='-y', title=None),
+        y=alt.Y('Fire Count', title=None),
+        tooltip=['Region', 'Fire Count']
+    ).properties(height=400)
+    
+    st.altair_chart(chart, use_container_width=True)
     st.caption("Top 5 highest risk regions (pseudo-state clusters) for the selected period.")
 
 st.divider()
