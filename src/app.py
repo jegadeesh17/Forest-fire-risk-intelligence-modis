@@ -32,7 +32,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-st.title("🔥 AI-Powered Geospatial Wildfire Analytics & Forecasting Platform")
+st.title("AI-Powered Geospatial Wildfire Analytics & Forecasting Platform")
 st.markdown("An environmental intelligence system combining ML classification, geospatial tracking, and time-series forecasting.")
 st.divider()
 
