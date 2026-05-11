@@ -56,6 +56,11 @@ def plot_forecast(forecast):
     ax.plot(forecast['ds'], forecast['yhat'], label='Forecasted Trend', color='#d62728', linewidth=2)
     ax.fill_between(forecast['ds'], forecast['yhat_lower'], forecast['yhat_upper'], color='#ff9896', alpha=0.3, label='Confidence Interval')
     
+    # Filter x-axis for readability (4 years historical + 6 months forecast)
+    max_date = forecast['ds'].max()
+    start_date = max_date - pd.DateOffset(years=4, months=6)
+    ax.set_xlim([start_date, max_date])
+    
     # Historical part? Usually prophet's plot method is easier but we do it custom for UI
     historical = forecast[forecast['trend'].notnull() & (forecast['ds'] < forecast['ds'].max() - pd.Timedelta(days=180))]
     

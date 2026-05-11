@@ -50,6 +50,7 @@ def load_data():
 
 @st.cache_resource
 def get_forecast(_df):
+    _cache_buster = 1  # Force cache invalidation
     model, ts_data = train_prophet_model(_df)
     forecast = generate_forecast(model, periods=6, freq='ME')
     metrics = evaluate_forecast(model, _df)
