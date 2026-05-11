@@ -8,3 +8,4 @@ folium
 jupyter
 streamlit
 streamlit-folium
+prophet
