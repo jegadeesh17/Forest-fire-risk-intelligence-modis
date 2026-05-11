@@ -100,7 +100,7 @@ with col_map:
 
 with col_state:
     st.subheader("Regional Risk Distribution")
-    state_counts = filtered_df['region_cluster'].value_counts().head(5)
+    state_counts = filtered_df['region_name'].value_counts().head(5)
     st.bar_chart(state_counts)
     st.caption("Top 5 highest risk regions (pseudo-state clusters) for the selected period.")
 

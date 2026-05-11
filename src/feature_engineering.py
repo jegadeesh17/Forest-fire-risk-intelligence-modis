@@ -32,6 +32,16 @@ def create_features(df):
     kmeans = KMeans(n_clusters=15, random_state=42)
     df['region_cluster'] = kmeans.fit_predict(df[['latitude', 'longitude']])
     
+    # Map clusters to readable pseudo-states based on centroids
+    cluster_names = {
+        0: "Punjab & Haryana", 1: "Odisha & Chhattisgarh", 2: "Mizoram & Tripura",
+        3: "Western Maharashtra", 4: "Western Madhya Pradesh", 5: "Eastern Madhya Pradesh",
+        6: "Tamil Nadu", 7: "UP & Nepal Border", 8: "Meghalaya & Assam",
+        9: "Marathwada & Telangana", 10: "Gujarat", 11: "Nagaland & Upper Assam",
+        12: "Jharkhand", 13: "Bastar & Eastern Telangana", 14: "Rayalaseema (AP)"
+    }
+    df['region_name'] = df['region_cluster'].map(cluster_names)
+    
     # 5. Fire Activity counts
     df['cluster_fire_count'] = df.groupby('region_cluster')['region_cluster'].transform('count')
     df['monthly_cluster_fire_count'] = df.groupby(['region_cluster', 'month'])['region_cluster'].transform('count')

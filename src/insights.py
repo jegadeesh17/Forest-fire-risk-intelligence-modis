@@ -26,8 +26,8 @@ def generate_insights(df, forecast):
         insights.append(f"⚠️ Extreme caution advised for **{peak_forecast_month['ds'].strftime('%B %Y')}**, which shows the highest projected risk ({peak_forecast_month['yhat']:.0f} anticipated events).")
     
     # 3. High Risk Regions
-    if 'region_cluster' in df.columns:
-        top_region = df[df['high_risk'] == 1]['region_cluster'].mode()[0]
-        insights.append(f"📍 **Region {top_region}** has historically concentrated the most high-severity thermal anomalies (FRP > 20, Confidence > 80%).")
+    if 'region_name' in df.columns:
+        top_region = df[df['high_risk'] == 1]['region_name'].mode()[0]
+        insights.append(f"📍 **{top_region}** has historically concentrated the most high-severity thermal anomalies (FRP > 20, Confidence > 80%).")
         
     return insights
