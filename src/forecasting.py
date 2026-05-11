@@ -6,7 +6,7 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error
 def prepare_time_series(df):
     """Aggregate historical MODIS observations monthly."""
     df['acq_date'] = pd.to_datetime(df['acq_date'])
-    monthly_data = df.groupby(pd.Grouper(key='acq_date', freq='M')).agg({
+    monthly_data = df.groupby(pd.Grouper(key='acq_date', freq='ME')).agg({
         'frp': 'mean',
         'latitude': 'count', # Count of fires
         'brightness': 'mean',
