@@ -3,6 +3,7 @@ import folium
 from folium.plugins import HeatMap
 import os
 import seaborn as sns
+import pandas as pd
 
 def get_color(risk):
     if risk == 'Low': return 'green'
