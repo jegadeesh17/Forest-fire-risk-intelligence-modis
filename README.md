@@ -18,6 +18,8 @@ The system analyzes thermal anomalies, spatial wildfire patterns, and temporal f
 * **Thermal Anomaly Detection:** Engineers brightness-based anomaly features for improved fire risk detection.
 * **Interactive Fire Mapping:** Visualizes wildfire hotspots and intensity using Folium heatmaps.
 * **Temporal Trend Analysis:** Tracks seasonal and monthly wildfire activity patterns.
+* **Interactive Streamlit Dashboard:** Live deployment for real-time monitoring and analytics.
+* **Contextual Cluster Insights:** AI-generated interpretation of spatial clusters for better stakeholder decision-making.
 
 ---
 
@@ -49,10 +51,14 @@ Forest-Fire-Risk-Analytics/
 ├── models/                   # Saved trained models
 ├── visualizations/           # Heatmaps and output plots
 ├── src/
-│   ├── preprocessing.py      # Data cleaning & feature engineering
-│   ├── clustering.py         # Spatial clustering logic
-│   ├── training.py           # XGBoost training pipeline
-│   └── visualization.py      # Geospatial visualization scripts
+│   ├── preprocessing.py      # Data cleaning
+│   ├── feature_engineering.py # Feature engineering logic
+│   ├── modeling.py           # Model training pipeline
+│   ├── forecasting.py        # Forecasting logic
+│   ├── evaluation.py         # Model evaluation
+│   ├── insights.py           # AI-generated insights and cluster interpretation
+│   ├── visualization.py      # Geospatial visualization scripts
+│   └── app.py                # Streamlit dashboard application
 │
 ├── fire_detection.ipynb      # Main end-to-end notebook
 ├── requirements.txt          # Python dependencies
@@ -247,7 +253,6 @@ A disaster management authority can use the platform to:
 * Real-time NASA FIRMS API integration
 * Weather and humidity data integration
 * Deep learning-based fire spread forecasting
-* Live wildfire dashboard deployment using Streamlit
 * Burn severity estimation using satellite imagery
 
 ---
