@@ -53,16 +53,16 @@ def plot_forecast(forecast):
     """Plot Prophet forecast with confidence intervals."""
     fig, ax = plt.subplots(figsize=(12, 6))
     
-    ax.plot(forecast['ds'], forecast['yhat'], label='Forecasted Trend', color='#d62728', linewidth=2)
-    ax.fill_between(forecast['ds'], forecast['yhat_lower'], forecast['yhat_upper'], color='#ff9896', alpha=0.3, label='Confidence Interval')
-    
-    # Filter x-axis for readability (4 years historical + 6 months forecast)
+    # Filter dataframe directly for readability (4 years historical + 6 months forecast)
     max_date = forecast['ds'].max()
     start_date = max_date - pd.DateOffset(years=4, months=6)
-    ax.set_xlim([start_date, max_date])
+    plot_df = forecast[(forecast['ds'] >= start_date) & (forecast['ds'] <= max_date)]
+    
+    ax.plot(plot_df['ds'], plot_df['yhat'], label='Forecasted Trend', color='#d62728', linewidth=2)
+    ax.fill_between(plot_df['ds'], plot_df['yhat_lower'], plot_df['yhat_upper'], color='#ff9896', alpha=0.3, label='Confidence Interval')
     
     # Historical part? Usually prophet's plot method is easier but we do it custom for UI
-    historical = forecast[forecast['trend'].notnull() & (forecast['ds'] < forecast['ds'].max() - pd.Timedelta(days=180))]
+    historical = plot_df[plot_df['trend'].notnull() & (plot_df['ds'] < plot_df['ds'].max() - pd.Timedelta(days=180))]
     
     ax.set_title("6-Month Wildfire Forecasting Projection", fontsize=14)
     ax.set_xlabel("Date")

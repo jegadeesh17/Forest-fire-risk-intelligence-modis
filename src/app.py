@@ -35,6 +35,7 @@ st.markdown("""
 
 st.title("AI-Powered Geospatial Wildfire Analytics & Forecasting Platform")
 st.markdown("An environmental intelligence system combining ML classification, geospatial tracking, and time-series forecasting.")
+st.write("") # Force UI reload
 st.divider()
 
 @st.cache_data
